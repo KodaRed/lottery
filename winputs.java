@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.Color;
 import java.awt.event.*;
+import javax.swing.SpinnerNumberModel;
 
 
 
@@ -121,6 +122,7 @@ public class Lottery {
 		frame.getContentPane().add(lblJackPotAmount);
 
 		textField = new JSpinner();
+		textField.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		textField.setBounds(175, 225, 40, 25);
 		frame.getContentPane().add(textField);      
 
@@ -158,18 +160,22 @@ public class Lottery {
 		frame.getContentPane().add(lblNewLabel_1);
 
 		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		spinner.setBounds(230, 225, 40, 25);
 		frame.getContentPane().add(spinner);
 
 		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		spinner_1.setBounds(285, 225, 40, 25);
 		frame.getContentPane().add(spinner_1);
 
 		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		spinner_2.setBounds(340, 225, 40, 25);
 		frame.getContentPane().add(spinner_2);
 
 		JSpinner spinner_3 = new JSpinner();
+		spinner_3.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		spinner_3.setBounds(395, 225, 40, 25);
 		frame.getContentPane().add(spinner_3);
 
