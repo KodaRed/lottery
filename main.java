@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JSpinner;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.ButtonGroup;
+import javax.swing.JProgressBar;
 
 
 
@@ -23,8 +25,6 @@ public class Lottery {
 	private JTextField textFieldLn;
    private int count = 0;
    Random gen;
-   //ArrayList<People> persons = new ArrayList<>(); // don't need it. Overcomplicates.
-
 	/**
 	 * Launch the application.
 	 */
@@ -44,16 +44,19 @@ public class Lottery {
 	/**
 	 * Create the application.
 	 */
-
+	
+	
+	
 	public class People {
 		private String firstName;
 		private String lastName;
-		private String state;
+		private boolean state;
 		private int number1, number2, number3, number4, number5;
       
-      public People(String fName, String lName, int s1, int s2, int s3, int s4, int s5){
+      public People(String fName, String lName, boolean state, int s1, int s2, int s3, int s4, int s5){
          this.firstName = fName;
          this.lastName = lName;
+         this.state = state;
          this.number1 = s1;
          this.number2 = s2;
          this.number3 = s3;
@@ -76,11 +79,15 @@ public class Lottery {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		gen = new Random();
+		Random numGen = new Random();
+		int win1 = numGen.nextInt(9)+1;
+		int win2 = numGen.nextInt(9)+1;
+		int win3 = numGen.nextInt(9)+1;
+		int win4 = numGen.nextInt(9)+1;
+		int win5 = numGen.nextInt(9)+1;
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 482, 369);
+		frame.setBounds(100, 100, 482, 352);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -201,7 +208,7 @@ public class Lottery {
 		frame.getContentPane().add(lblJackPot);
       
       JButton btnAddPerson = new JButton("Add Person");
-		btnAddPerson.setBounds(290, 287, 134, 29);
+		btnAddPerson.setBounds(301, 269, 134, 29);
 		frame.getContentPane().add(btnAddPerson);
       
       
@@ -217,60 +224,72 @@ public class Lottery {
           int value5 = (Integer)textField.getValue();
           String fName = textFieldFn.getText();
           String lName = textFieldLn.getText();
-          setData(fName, lName, value1, value2, value3, value4, value5);
+          boolean state = buttonGroup.isSelected(null);
+          setData(fName, lName, state, value1, value2, value3, value4, value5);
         }
       });
 	}
     
     
-   public void setData(String fName, String lName, int s2, int s3, int s4, int s5, int s1){
+   public void setData(String fName, String lName, Boolean state, int s2, int s3, int s4, int s5, int s1){
       if(count == 0){
-         p1 = new People(fName, lName, s1, s2, s3, s4, s5);//set struct class
+         p1 = new People(fName, lName, state, s1, s2, s3, s4, s5);//set struct class
       }
       if(count == 1){
-         p2 = new People(fName, lName, s1, s2, s3, s4, s5);
+         p2 = new People(fName, lName, state, s1, s2, s3, s4, s5);
       }
       if(count == 2){
-         p3 = new People(fName, lName, s1, s2, s3, s4, s5);
+         p3 = new People(fName, lName, state, s1, s2, s3, s4, s5);
       }
       if(count == 3){
-         p4 = new People(fName, lName, s1, s2, s3, s4, s5);
+         p4 = new People(fName, lName, state, s1, s2, s3, s4, s5);
       }
       if(count == 4){
-         p5 = new People(fName, lName, s1, s2, s3, s4, s5);
-         displayResults();
+         p5 = new People(fName, lName, state, s1, s2, s3, s4, s5);
+         displayResults(null);
       }
 
       count++;
    }
+   public ArrayList<Integer> winNumbers(){
+	   Random numGen = new Random();
+	   ArrayList<Integer> winNumbers = new ArrayList<>();
+	   for(int i = 1; i < 5; i++) {
+		   int win = numGen.nextInt(9)+1;
+		   winNumbers.add(win);
+	   }
+	return winNumbers;
+	
+	   
+   }
    
    public int generateResults(People p){
       int other = 1; // make it so you can compare values to random numbers
-//       if(p.number1 == gen){//needs adjustment
-//          other *= 1000;   //needs adjustment
-//       }
-//       if(p.number2 == gen){
-//          other *= 1000;
-//       }
-//       if(p.number3 == gen){
-//          other *= 1000;
-//       }
-//       if(p.number4 == gen){
-//          other *= 1000;
-//       }
-//       if(p.number5 == gen){
-//          other *= 1000;
-//       }
-      
-      return other;
+       if(p.number1 == winNumbers.get(0)){
+          other *= 1000;   
+       }
+       if(p.number2 == winNumbers.get(1)){
+          other *= 1000;
+       }
+       if(p.number3 == winNumbers.get(2)){
+          other *= 1000;
+       }
+       if(p.number4 == winNumbers.get(3)){
+          other *= 1000;
+       }
+       if(p.number5 == winNumbers.get(4)){
+          other *= 1000;
+       }
+	return other;
    }
    
-   public void displayResults(){//convert to text box and add state
+   public void displayResults(ArrayList<Integer> winNumbers){//convert to text box and add state
       System.out.println(p1.firstName + " " + p1.lastName + " chose numbers: " + p1.number1 + " " + p1.number2 + " " + p1.number3 + " " + p1.number4 + " " + p1.number5 + " and won " + generateResults(p1));
       System.out.println(p2.firstName + " " + p2.lastName + " chose numbers: " + p2.number1 + " " + p2.number2 + " " + p2.number3 + " " + p2.number4 + " " + p2.number5 + " and won " + generateResults(p2));
       System.out.println(p3.firstName + " " + p3.lastName + " chose numbers: " + p3.number1 + " " + p3.number2 + " " + p3.number3 + " " + p3.number4 + " " + p3.number5 + " and won " + generateResults(p3));
       System.out.println(p4.firstName + " " + p4.lastName + " chose numbers: " + p4.number1 + " " + p4.number2 + " " + p4.number3 + " " + p4.number4 + " " + p4.number5 + " and won " + generateResults(p4));
       System.out.println(p5.firstName + " " + p5.lastName + " chose numbers: " + p5.number1 + " " + p5.number2 + " " + p5.number3 + " " + p5.number4 + " " + p5.number5 + " and won " + generateResults(p5));
+      System.out.println("Winning Numbers : " + winNumbers);
       System.exit(0);
    }
 }
