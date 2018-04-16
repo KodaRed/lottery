@@ -15,12 +15,11 @@ import java.text.NumberFormat;
 
 import javax.swing.SpinnerNumberModel;
 import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
 
 public class Lottery {
 
 	private JFrame frame;
-	private JSpinner textField;
+	private JSpinner spinner_4;
 	private JTextField textFieldFn;
 	private JTextField textFieldLn;
 	private int count = 0;
@@ -129,10 +128,10 @@ public class Lottery {
 		lblJackPotAmount.setBounds(230, 116, 61, 16);
 		frame.getContentPane().add(lblJackPotAmount);
 
-		textField = new JSpinner();
-		textField.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		textField.setBounds(175, 225, 40, 25);
-		frame.getContentPane().add(textField);
+		spinner_4 = new JSpinner();
+		spinner_4.setModel(new SpinnerNumberModel(1, 1, 9, 1));
+		spinner_4.setBounds(330, 225, 40, 25);
+		frame.getContentPane().add(spinner_4);
 
 		JLabel lblNewLabel = new JLabel("Select a State:");
 		lblNewLabel.setBounds(31, 153, 109, 16);
@@ -172,24 +171,24 @@ public class Lottery {
 		lblNewLabel_1.setBounds(172, 179, 108, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner.setBounds(230, 225, 40, 25);
-		frame.getContentPane().add(spinner);
+		JSpinner spinner_5 = new JSpinner();
+		spinner_5.setModel(new SpinnerNumberModel(1, 1, 9, 1));
+		spinner_5.setBounds(384, 225, 40, 25);
+		frame.getContentPane().add(spinner_5);
 
 		JSpinner spinner_1 = new JSpinner();
 		spinner_1.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_1.setBounds(285, 225, 40, 25);
+		spinner_1.setBounds(170, 225, 40, 25);
 		frame.getContentPane().add(spinner_1);
 
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_2.setBounds(340, 225, 40, 25);
+		spinner_2.setBounds(220, 225, 40, 25);
 		frame.getContentPane().add(spinner_2);
 
 		JSpinner spinner_3 = new JSpinner();
 		spinner_3.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_3.setBounds(395, 225, 40, 25);
+		spinner_3.setBounds(275, 225, 40, 25);
 		frame.getContentPane().add(spinner_3);
 
 		textFieldFn = new JTextField();
@@ -216,15 +215,25 @@ public class Lottery {
 		btnAddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// display/center the jdialog when the button is pressed
-				int value1 = (Integer) spinner.getValue();
-				int value2 = (Integer) spinner_1.getValue();
-				int value3 = (Integer) spinner_2.getValue();
-				int value4 = (Integer) spinner_3.getValue();
-				int value5 = (Integer) textField.getValue();
+				int value1 = (Integer) spinner_1.getValue();
+				int value2 = (Integer) spinner_2.getValue();
+				int value3 = (Integer) spinner_3.getValue();
+				int value4 = (Integer) spinner_4.getValue();
+				int value5 = (Integer) spinner_5.getValue();
 				String fName = textFieldFn.getText();
 				String lName = textFieldLn.getText();
 				boolean state = buttonGroup.isSelected(null);
 				setData(fName, lName, state, value1, value2, value3, value4, value5);
+				// Clears Data after First Person
+				textFieldFn.setText(" ");
+				textFieldLn.setText(" ");
+				spinner_1.setValue(1);
+				spinner_2.setValue(1);
+				spinner_3.setValue(1);
+				spinner_4.setValue(1);
+				spinner_5.setValue(1);
+				buttonGroup.clearSelection();
+				
 			}
 		});
 	}
@@ -283,7 +292,6 @@ public class Lottery {
 				+ p4.number3 + " " + p4.number4 + " " + p4.number5 + " and won " + generateResults(p4));
 		System.out.println(p5.firstName + " " + p5.lastName + " chose numbers: " + p5.number1 + " " + p5.number2 + " "
 				+ p5.number3 + " " + p5.number4 + " " + p5.number5 + " and won " + generateResults(p5));
-
 		System.exit(0);
 	}
 }
