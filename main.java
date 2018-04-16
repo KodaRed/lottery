@@ -16,6 +16,7 @@ import java.text.NumberFormat;
 
 import javax.swing.SpinnerNumberModel;
 import javax.swing.ButtonGroup;
+import javax.swing.SwingConstants;
 
 public class Lottery {
 
@@ -81,11 +82,12 @@ public class Lottery {
 	private void initialize() {
 		gen = new Random();
 		// Generates the Winning Numbers
-		for(int i = 0; i < 4; i++) {
-			int win = gen.nextInt(9 - 1 + 1)+1;
+		for(int i = 0; i < 5; i++) {
+			int win = gen.nextInt(8)+1;
 			winningNumbers[i] = win;
 		}
 		System.out.println(Arrays.toString(winningNumbers));
+		//Output for Test
 		frame = new JFrame();
 		frame.setBounds(100, 100, 484, 353);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -202,6 +204,7 @@ public class Lottery {
 		textFieldLn.setColumns(10);
 		textFieldLn.setBounds(32, 115, 108, 26);
 		frame.getContentPane().add(textFieldLn);
+		String errorMessage = null;
 
 		double jackpot = gen.nextInt(10000000)+1000000;
 
@@ -210,12 +213,21 @@ public class Lottery {
 		lblJackPot.setBounds(302, 116, 125, 16);
 		frame.getContentPane().add(lblJackPot);
 
+		JLabel error = new JLabel(errorMessage);
+		error.setHorizontalAlignment(SwingConstants.LEFT);
+		error.setForeground(Color.RED);
+		error.setBounds(32, 6, 338, 14);
+		frame.getContentPane().add(error);
+		
+
 		JButton btnAddPerson = new JButton("Add Person");
 		btnAddPerson.setBounds(301, 269, 134, 29);
 		frame.getContentPane().add(btnAddPerson);
+		
 
 		btnAddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!spinner_1.equals(0) && !spinner_1.equals(0) && !spinner_1.equals(0) && !spinner_1.equals(0) && !spinner_1.equals(0) && !textFieldFn.equals(" ") && !textFieldLn.equals(" ") && !buttonGroup.isSelected(null)) {
 				// display/center the jdialog when the button is pressed
 				int value1 = (Integer) spinner_1.getValue();
 				int value2 = (Integer) spinner_2.getValue();
@@ -225,6 +237,7 @@ public class Lottery {
 				String fName = textFieldFn.getText();
 				String lName = textFieldLn.getText();
 				boolean state = buttonGroup.isSelected(null);
+			
 				setData(fName, lName, state, value1, value2, value3, value4, value5);
 				// Clears Data after First Person
 				textFieldFn.setText(" ");
@@ -235,9 +248,15 @@ public class Lottery {
 				spinner_4.setValue(1);
 				spinner_5.setValue(1);
 				buttonGroup.clearSelection();
-				
+				error.setText(" ");
+				}
+				else {
+					error.setText("You did not fill out all the required fields!");
+				}
 			}
 		});
+		
+
 	}
 
 	public void setData(String fName, String lName, Boolean state, int s2, int s3, int s4, int s5, int s1) {
