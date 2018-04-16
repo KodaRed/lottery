@@ -4,6 +4,7 @@ import javax.swing.JSpinner;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 import javax.swing.JTextField;
@@ -84,6 +85,7 @@ public class Lottery {
 			int win = gen.nextInt(9 - 1 + 1)+1;
 			winningNumbers[i] = win;
 		}
+		System.out.println(Arrays.toString(winningNumbers));
 		frame = new JFrame();
 		frame.setBounds(100, 100, 484, 353);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
