@@ -89,7 +89,7 @@ public class Lottery {
 		System.out.println(Arrays.toString(winningNumbers));
 		//Output for Test
 		frame = new JFrame();
-		frame.setBounds(100, 100, 484, 353);
+		frame.setBounds(100, 100, 484, 360);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -214,9 +214,9 @@ public class Lottery {
 		frame.getContentPane().add(lblJackPot);
 
 		JLabel error = new JLabel(errorMessage);
-		error.setHorizontalAlignment(SwingConstants.LEFT);
+		error.setHorizontalAlignment(SwingConstants.RIGHT);
 		error.setForeground(Color.RED);
-		error.setBounds(32, 6, 338, 14);
+		error.setBounds(97, 300, 338, 14);
 		frame.getContentPane().add(error);
 		
 
