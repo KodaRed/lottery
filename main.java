@@ -8,18 +8,15 @@ import java.util.Locale;
 import java.util.Random;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+
 import java.awt.Color;
 import java.awt.event.*;
 import java.text.NumberFormat;
 
 import javax.swing.SpinnerNumberModel;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.AbstractListModel;
+import javax.swing.JRadioButton;
 
 public class Lottery {
 	static Random gen;
@@ -28,7 +25,6 @@ public class Lottery {
 	private JTextField textFieldFn;
 	private JTextField textFieldLn;
 	private int count = 0;
-	double Wyoming = 0.04, Nevada = 0.081, Colorado = 0.029, Utah = 0.047, Idaho = 0.06;
 	public int other;
 	double jackpot;
 	static int[] winningNumbers = new int[5];
@@ -48,21 +44,18 @@ public class Lottery {
 			}
 		});
 	}
+
 	/**
 	 * Create the application.
 	 */
 
 	public class People {
-		private String firstName;
-		private String lastName;
-		private double state;
+		private String firstName, lastName, state, info, numbers, fullName;
 		private int number1, number2, number3, number4, number5;
-		public double winnings;
-		public double atWinnings;
-		public double taxAmount;
+		public double winnings, atWinnings, taxAmount, taxPercent;
 
-
-		public People(String fName, String lName, double state, int s1, int s2, int s3, int s4, int s5,double winnings, double atWinnings) {
+		public People(String fName, String lName, String state, int s1, int s2, int s3, int s4, int s5, double winnings,
+				double taxAmount, double atWinnings, double taxPercent, String info, String numbers, String fullName) {
 			this.firstName = fName;
 			this.lastName = lName;
 			this.state = state;
@@ -71,8 +64,13 @@ public class Lottery {
 			this.number3 = s3;
 			this.number4 = s4;
 			this.number5 = s5;
+			this.taxAmount = taxAmount;
 			this.winnings = winnings;
 			this.atWinnings = atWinnings;
+			this.taxPercent = taxPercent;
+			this.info = info;
+			this.fullName = fullName;
+			this.numbers = numbers;
 		}
 	}
 
@@ -93,14 +91,14 @@ public class Lottery {
 	private void initialize() {
 		gen = new Random();
 		// Generates the Winning Numbers
-		for(int i = 0; i < 5; i++) {
-			int win = gen.nextInt(8)+1;
+		for (int i = 0; i < 5; i++) {
+			int win = gen.nextInt(8) + 1;
 			winningNumbers[i] = win;
 		}
-		jackpot = gen.nextInt(10000000)+1000000;
-		
+		jackpot = gen.nextInt(10000000) + 1000000;
+
 		System.out.println(Arrays.toString(winningNumbers));
-		//Output for Test
+		// Output for Test
 		frmLotteryProgram = new JFrame();
 		frmLotteryProgram.setTitle("Lottery Program");
 		frmLotteryProgram.setBounds(100, 100, 484, 360);
@@ -142,14 +140,10 @@ public class Lottery {
 		spinner5.setBounds(412, 207, 13, 16);
 		frmLotteryProgram.getContentPane().add(spinner5);
 
-		JLabel lblJackPotAmount = new JLabel("JACKPOT:");
-		lblJackPotAmount.setBounds(230, 116, 61, 16);
-		frmLotteryProgram.getContentPane().add(lblJackPotAmount);
+		JLabel taxPLbl = new JLabel("Your State :");
+		taxPLbl.setBounds(32, 162, 109, 16);
+		frmLotteryProgram.getContentPane().add(taxPLbl);
 
-		JLabel lblNewLabel = new JLabel("Select a State:");
-		lblNewLabel.setBounds(31, 153, 109, 16);
-		frmLotteryProgram.getContentPane().add(lblNewLabel);
-		
 		JLabel lblNewLabel_1 = new JLabel("Pick 5 numbers:");
 		lblNewLabel_1.setBounds(172, 179, 108, 16);
 		frmLotteryProgram.getContentPane().add(lblNewLabel_1);
@@ -168,16 +162,16 @@ public class Lottery {
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		spinner_2.setBounds(275, 225, 40, 25);
 		frmLotteryProgram.getContentPane().add(spinner_2);
-				
-						spinner_3 = new JSpinner();
-						spinner_3.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-						spinner_3.setBounds(330, 225, 40, 25);
-						frmLotteryProgram.getContentPane().add(spinner_3);
-		
-				JSpinner spinner_4 = new JSpinner();
-				spinner_4.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-				spinner_4.setBounds(380, 225, 40, 25);
-				frmLotteryProgram.getContentPane().add(spinner_4);
+
+		spinner_3 = new JSpinner();
+		spinner_3.setModel(new SpinnerNumberModel(1, 1, 9, 1));
+		spinner_3.setBounds(330, 225, 40, 25);
+		frmLotteryProgram.getContentPane().add(spinner_3);
+
+		JSpinner spinner_4 = new JSpinner();
+		spinner_4.setModel(new SpinnerNumberModel(1, 1, 9, 1));
+		spinner_4.setBounds(380, 225, 40, 25);
+		frmLotteryProgram.getContentPane().add(spinner_4);
 
 		textFieldFn = new JTextField();
 		textFieldFn.setBounds(30, 70, 108, 26);
@@ -191,8 +185,9 @@ public class Lottery {
 		String errorMessage = null;
 
 		JLabel lblJackPot = new JLabel("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
-		lblJackPot.setForeground(Color.RED);
-		lblJackPot.setBounds(302, 116, 125, 16);
+		lblJackPot.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		lblJackPot.setForeground(new Color(50, 205, 50));
+		lblJackPot.setBounds(178, 95, 249, 47);
 		frmLotteryProgram.getContentPane().add(lblJackPot);
 
 		JLabel error = new JLabel(errorMessage);
@@ -200,139 +195,168 @@ public class Lottery {
 		error.setForeground(Color.RED);
 		error.setBounds(97, 300, 338, 14);
 		frmLotteryProgram.getContentPane().add(error);
-		
 
 		JButton btnAddPerson = new JButton("Add Person");
 		btnAddPerson.setBounds(301, 269, 134, 29);
 		frmLotteryProgram.getContentPane().add(btnAddPerson);
-		
-		JList states = new JList();
-		states.setValueIsAdjusting(true);
-		states.setVisibleRowCount(5);
-		states.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Wyoming", "Nevada", "Colorado", "Idaho", "Utah"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		states.setSelectedIndex(0);
-		states.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		states.setBounds(32, 169, 96, 120);
-		frmLotteryProgram.getContentPane().add(states);
-		
+
+		JRadioButton rdbtnUtah = new JRadioButton("Utah");
+		buttonGroup.add(rdbtnUtah);
+		rdbtnUtah.setBounds(32, 176, 109, 23);
+		frmLotteryProgram.getContentPane().add(rdbtnUtah);
+		rdbtnUtah.setActionCommand("0.047");
+
+		JRadioButton rdbtnIdaho = new JRadioButton("Idaho");
+		buttonGroup.add(rdbtnIdaho);
+		rdbtnIdaho.setBounds(32, 204, 109, 23);
+		frmLotteryProgram.getContentPane().add(rdbtnIdaho);
+		rdbtnIdaho.setActionCommand("0.06");
+
+		JRadioButton rdbtnNevada = new JRadioButton("Nevada");
+		buttonGroup.add(rdbtnNevada);
+		rdbtnNevada.setBounds(32, 227, 109, 23);
+		frmLotteryProgram.getContentPane().add(rdbtnNevada);
+		rdbtnNevada.setActionCommand("0.081");
+
+		JRadioButton rdbtnColorado = new JRadioButton("Colorado");
+		buttonGroup.add(rdbtnColorado);
+		rdbtnColorado.setBounds(32, 248, 109, 23);
+		frmLotteryProgram.getContentPane().add(rdbtnColorado);
+		rdbtnColorado.setActionCommand("0.029");
+
+		JRadioButton rdbtnWyoming = new JRadioButton("Wyoming");
+		buttonGroup.add(rdbtnWyoming);
+		rdbtnWyoming.setBounds(32, 270, 109, 23);
+		frmLotteryProgram.getContentPane().add(rdbtnWyoming);
+		rdbtnWyoming.setActionCommand("0.04");
 
 		btnAddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				if(!spinner_1.equals(0) && !spinner_1.equals(0) && !spinner_1.equals(0) && !spinner_1.equals(0) && !spinner_1.equals(0) && !textFieldFn.equals(" ") && !textFieldLn.equals(" ") && !states.isSelectionEmpty()) {
-				// display/center the jdialog when the button is pressed
-				int number1 = (Integer) spinner_5.getValue();
-				int number2 = (Integer) spinner_1.getValue();
-				int number3 = (Integer) spinner_2.getValue();
-				int number4 = (Integer) spinner_3.getValue();
-				int number5 = (Integer) spinner_4.getValue();
-				String fName = textFieldFn.getText();
-				String lName = textFieldLn.getText();
-				double state = states.getSelectedIndex();
-				double atWinnings = 0;
-				double winnings = 0;
-			
-				setData(fName, lName, state, number1, number2, number3, number4, number5, winnings, atWinnings);
-				// Clears Data after First Person
-				textFieldFn.setText(" ");
-				textFieldLn.setText(" ");
-				spinner_5.setValue(1);
-				spinner_1.setValue(1);
-				spinner_2.setValue(1);
-				spinner_3.setValue(1);
-				spinner_4.setValue(1);
-				states.setSelectedIndex(0);
-				error.setText(" ");
+				if (!textFieldFn.equals(" ") && !textFieldLn.equals(" ") && !buttonGroup.isSelected(null)) {
+					int number1 = (Integer) spinner_5.getValue();
+					int number2 = (Integer) spinner_1.getValue();
+					int number3 = (Integer) spinner_2.getValue();
+					int number4 = (Integer) spinner_3.getValue();
+					int number5 = (Integer) spinner_4.getValue();
+					String fName = textFieldFn.getText();
+					String lName = textFieldLn.getText();
+					String state = buttonGroup.getSelection().getActionCommand();
+					double atWinnings = 0;
+					double winnings = 0;
+					double taxAmount = 0;
+					double taxPercent = 0;
+					String numbers = String.format("%d,%d,%d,%d,%d", number1, number2, number3, number4, number5);
+					String fullName = String.format("%s,%s", fName, lName);
+					String info = String.format("%-15s %-15s", fullName, numbers);
+
+					setData(fName, lName, state, number1, number2, number3, number4, number5, winnings, taxAmount,
+							atWinnings, taxPercent, info, numbers, fullName);
+					// Clears Data after First Person
+					textFieldFn.setText(" ");
+					textFieldLn.setText(" ");
+					buttonGroup.clearSelection();
+					spinner_5.setValue(1);
+					spinner_1.setValue(1);
+					spinner_2.setValue(1);
+					spinner_3.setValue(1);
+					spinner_4.setValue(1);
+					error.setText(" ");
+				} else {
+					error.setText("You did not fill out all the required fields!");
 				}
-//				else {
-//					error.setText("You did not fill out all the required fields!");
-//				}
-//			}
+			}
 		});
-		
 
 	}
-	
-public void setData(String fName, String lName, double state, int s1, int s2, int s3, int s4, int s5,double winnings, double atWinnings) {
-	if (count == 0) {
-		p1 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, atWinnings);// set struct class
-	}
-	if (count == 1) {
-		p2 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, atWinnings);
-	}
-	if (count == 2) {
-		p3 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, atWinnings);
-	}
-	if (count == 3) {
-		p4 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, atWinnings);
-	}
-	if (count == 4) {
-		p5 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, atWinnings);
-		displayResults();
+
+	public void setData(String fName, String lName, String state, int s1, int s2, int s3, int s4, int s5,
+			double winnings, double taxAmount, double atWinnings, double taxPercent, String info, String numbers,
+			String fullName) {
+		if (count == 0) {
+			p1 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, taxAmount, atWinnings, taxPercent, info,
+					numbers, fullName);
+		}
+		if (count == 1) {
+			p2 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, taxAmount, atWinnings, taxPercent, info,
+					numbers, fullName);
+		}
+		if (count == 2) {
+			p3 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, taxAmount, atWinnings, taxPercent, info,
+					numbers, fullName);
+		}
+		if (count == 3) {
+			p4 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, taxAmount, atWinnings, taxPercent, info,
+					numbers, fullName);
+		}
+		if (count == 4) {
+			p5 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, taxAmount, atWinnings, taxPercent, info,
+					numbers, fullName);
+			displayResults();
+		}
+
+		count++;
 	}
 
-	count++;
-}
+	public int generateWins(People p) {
+		other = 0;
+		if (p.number1 == winningNumbers[0]) {
+			other += 1;
+		}
+		if (p.number2 == winningNumbers[1]) {
+			other += 1;
+		}
+		if (p.number3 == winningNumbers[2]) {
+			other += 1;
+		}
+		if (p.number4 == winningNumbers[3]) {
+			other += 1;
+		}
+		if (p.number5 == winningNumbers[4]) {
+			other += 1;
+		}
 
-public int generateResults(People p){
-	other = 0;
-     if(p.number1 == winningNumbers[0]){
-         other += 1;
-     }
-     if(p.number2 == winningNumbers[1]){
-        other += 1;
-     }
-     if(p.number3 == winningNumbers[2]){
-         other += 1;
-     }
-     if(p.number4 == winningNumbers[3]){
-         other += 1;
-     }
-     if(p.number5 == winningNumbers[4]){
-         other += 1;
-     }
-     
-	return other;
+		return other;
 
- }
-public double winAmount(People p) {
-	if(other == 1) {
-		p.winnings = jackpot * 0.025;
 	}
-	if(other == 2) {
-		p.winnings = jackpot * 0.05;
-	}
-	if(other == 3) {
-		p.winnings = jackpot * 0.075;
-	}
-	if(other == 4) {
-		p.winnings = jackpot * 0.1;
-	}
-	if(other == 5) {
-		p.winnings = jackpot * 0.75;
-	}
-	return p.winnings;
-}
 
-	public void displayResults() {// convert to text box and add state
-		System.out.println("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
-		System.out.println(p1.firstName + " " + p1.lastName + " chose numbers: " + p1.number1 + " " + p1.number2 + " "
-				+ p1.number3 + " " + p1.number4 + " " + p1.number5 + " and got " + generateResults(p1) + " correctly " + "and won " + "$ " + NumberFormat.getNumberInstance(Locale.US).format(winAmount(p1)) );
-		System.out.println(p2.firstName + " " + p2.lastName + " chose numbers: " + p2.number1 + " " + p2.number2 + " "
-				+ p2.number3 + " " + p2.number4 + " " + p2.number5 + " and won " + generateResults(p2));
-		System.out.println(p3.firstName + " " + p3.lastName + " chose numbers: " + p3.number1 + " " + p3.number2 + " "
-				+ p3.number3 + " " + p3.number4 + " " + p3.number5 + " and won " + generateResults(p3));
-		System.out.println(p4.firstName + " " + p4.lastName + " chose numbers: " + p4.number1 + " " + p4.number2 + " "
-				+ p4.number3 + " " + p4.number4 + " " + p4.number5 + " and won " + generateResults(p4));
-		System.out.println(p5.firstName + " " + p5.lastName + " chose numbers: " + p5.number1 + " " + p5.number2 + " "
-				+ p5.number3 + " " + p5.number4 + " " + p5.number5 + " and won " + generateResults(p5));
+	public double winAmount(People p) {
+		p.taxPercent = Double.parseDouble(p.state);
+		if (other == 1) {
+			p.winnings = jackpot * 0.025;
+		}
+		if (other == 2) {
+			p.winnings = jackpot * 0.05;
+		}
+		if (other == 3) {
+			p.winnings = jackpot * 0.075;
+		}
+		if (other == 4) {
+			p.winnings = jackpot * 0.1;
+		}
+		if (other == 5) {
+			p.winnings = jackpot * 0.75;
+		}
+		p.taxAmount = p.winnings * p.taxPercent;
+		p.atWinnings = p.winnings - p.taxAmount;
+		return p.atWinnings;
+	}
+
+	public void displayResults() {// convert to text box and add state\
+		System.out.println("Jackpot: " + NumberFormat.getNumberInstance(Locale.US).format(jackpot)
+				+ "   Winning Numbers: " + Arrays.toString(winningNumbers));
+		System.out.printf("%n%-15s %-15s %-15s %-15s", "NAME", "NUMBERS", "# Matched", "WINNINGS");
+		System.out.println("\n------------------------------------------------------------");
+		System.out.printf("%s %-15s $%-15s%n", p1.info, generateWins(p1),
+				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p1)));
+		System.out.printf("%s %-15s $%-15s%n", p2.info, generateWins(p2),
+				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p2)));
+		System.out.printf("%s %-15s $%-15s%n", p3.info, generateWins(p3),
+				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p3)));
+		System.out.printf("%s %-15s $%-15s%n", p4.info, generateWins(p4),
+				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p4)));
+		System.out.printf("%s %-15s $%-15s%n", p5.info, generateWins(p5),
+				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p5)));
+
 		System.exit(0);
 	}
 }
