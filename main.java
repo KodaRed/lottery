@@ -100,7 +100,7 @@ public class Lottery {
 		gen = new Random();
 		// Generates the Winning Numbers
 		for (int i = 0; i < 5; i++) {
-			int win = gen.nextInt(8) + 1;
+			int win = gen.nextInt(9) + 1;
 			winningNumbers[i] = win;
 		}
 		jackpot = gen.nextInt(10000000) + 1000000;
