@@ -292,7 +292,7 @@ public class Lottery {
 		JLabel lblWinnings = new JLabel("Winnings");
 		lblWinnings.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWinnings.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblWinnings.setBounds(306, 94, 108, 35);
+		lblWinnings.setBounds(295, 94, 119, 35);
 		resultsPanel.add(lblWinnings);
 
 		JLabel name1 = new JLabel();
