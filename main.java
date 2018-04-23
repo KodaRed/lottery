@@ -17,6 +17,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
+import javax.swing.JPanel;
 
 public class Lottery {
 	static Random gen;
@@ -24,7 +25,7 @@ public class Lottery {
 	private JSpinner spinner_3;
 	private JTextField textFieldFn;
 	private JTextField textFieldLn;
-	private int count = 0;
+	private static int count = 0;
 	public int other;
 	double jackpot;
 	static int[] winningNumbers = new int[5];
@@ -34,6 +35,7 @@ public class Lottery {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Lottery window = new Lottery();
@@ -43,6 +45,7 @@ public class Lottery {
 				}
 			}
 		});
+
 	}
 
 	/**
@@ -71,6 +74,7 @@ public class Lottery {
 			this.info = info;
 			this.fullName = fullName;
 			this.numbers = numbers;
+
 		}
 	}
 
@@ -96,148 +100,277 @@ public class Lottery {
 			winningNumbers[i] = win;
 		}
 		jackpot = gen.nextInt(10000000) + 1000000;
-
-		System.out.println(Arrays.toString(winningNumbers));
+		// System.out.println(Arrays.toString(winningNumbers));
 		// Output for Test
 		frmLotteryProgram = new JFrame();
 		frmLotteryProgram.setTitle("Lottery Program");
-		frmLotteryProgram.setBounds(100, 100, 484, 360);
-		frmLotteryProgram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frmLotteryProgram.setBounds(100, 100, 530, 360);
+
 		frmLotteryProgram.getContentPane().setLayout(null);
 
-		JLabel lblLottery = new JLabel("Lottery");
-		lblLottery.setFont(new Font("Lucida Grande", Font.BOLD, 50));
-		lblLottery.setBounds(233, 6, 191, 74);
-		frmLotteryProgram.getContentPane().add(lblLottery);
+		JPanel firstPanel = new JPanel();
+		firstPanel.setBounds(0, 0, 514, 321);
+		frmLotteryProgram.getContentPane().add(firstPanel);
+		firstPanel.setLayout(null);
+
+		JLabel error = new JLabel();
+		error.setBounds(212, 236, 248, 23);
+		firstPanel.add(error);
+		error.setHorizontalAlignment(SwingConstants.RIGHT);
+		error.setForeground(Color.RED);
 
 		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setBounds(27, 28, 64, 16);
+		firstPanel.add(lblFirstName);
 		lblFirstName.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		lblFirstName.setBounds(32, 50, 96, 16);
-		frmLotteryProgram.getContentPane().add(lblFirstName);
 
 		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setBounds(27, 79, 64, 16);
+		firstPanel.add(lblLastName);
 		lblLastName.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		lblLastName.setBounds(32, 95, 98, 16);
-		frmLotteryProgram.getContentPane().add(lblLastName);
-
-		JLabel spinner2 = new JLabel("2");
-		spinner2.setBounds(247, 207, 13, 16);
-		frmLotteryProgram.getContentPane().add(spinner2);
-
-		JLabel spinner1 = new JLabel("1");
-		spinner1.setBounds(192, 207, 18, 16);
-		frmLotteryProgram.getContentPane().add(spinner1);
-
-		JLabel spinner3 = new JLabel("3");
-		spinner3.setBounds(302, 207, 13, 16);
-		frmLotteryProgram.getContentPane().add(spinner3);
-
-		JLabel spinner4 = new JLabel("4");
-		spinner4.setBounds(357, 207, 13, 16);
-		frmLotteryProgram.getContentPane().add(spinner4);
-
-		JLabel spinner5 = new JLabel("5");
-		spinner5.setBounds(412, 207, 13, 16);
-		frmLotteryProgram.getContentPane().add(spinner5);
 
 		JLabel taxPLbl = new JLabel("Your State :");
-		taxPLbl.setBounds(32, 162, 109, 16);
-		frmLotteryProgram.getContentPane().add(taxPLbl);
+		taxPLbl.setBounds(27, 155, 161, 14);
+		firstPanel.add(taxPLbl);
 
-		JLabel lblNewLabel_1 = new JLabel("Pick 5 numbers:");
-		lblNewLabel_1.setBounds(172, 179, 108, 16);
-		frmLotteryProgram.getContentPane().add(lblNewLabel_1);
+		JLabel lblLottery = new JLabel("Lottery");
+		lblLottery.setBounds(274, 11, 170, 64);
+		firstPanel.add(lblLottery);
+		lblLottery.setFont(new Font("Lucida Grande", Font.BOLD, 50));
 
-		JSpinner spinner_5 = new JSpinner();
-		spinner_5.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_5.setBounds(170, 225, 40, 25);
-		frmLotteryProgram.getContentPane().add(spinner_5);
+		JLabel lblJackPot = new JLabel("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
+		lblJackPot.setBounds(286, 86, 147, 33);
+		firstPanel.add(lblJackPot);
+		lblJackPot.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		lblJackPot.setForeground(new Color(50, 205, 50));
+
+		JLabel lblPickNumbers = new JLabel("Pick 5 numbers:");
+		lblPickNumbers.setBounds(212, 167, 149, 14);
+		firstPanel.add(lblPickNumbers);
 
 		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setBounds(222, 192, 31, 20);
+		firstPanel.add(spinner_1);
 		spinner_1.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_1.setBounds(220, 225, 40, 25);
-		frmLotteryProgram.getContentPane().add(spinner_1);
 
 		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setBounds(258, 192, 31, 20);
+		firstPanel.add(spinner_2);
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_2.setBounds(275, 225, 40, 25);
-		frmLotteryProgram.getContentPane().add(spinner_2);
 
 		spinner_3 = new JSpinner();
+		spinner_3.setBounds(294, 192, 31, 20);
+		firstPanel.add(spinner_3);
 		spinner_3.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_3.setBounds(330, 225, 40, 25);
-		frmLotteryProgram.getContentPane().add(spinner_3);
 
 		JSpinner spinner_4 = new JSpinner();
+		spinner_4.setBounds(330, 192, 31, 20);
+		firstPanel.add(spinner_4);
 		spinner_4.setModel(new SpinnerNumberModel(1, 1, 9, 1));
-		spinner_4.setBounds(380, 225, 40, 25);
-		frmLotteryProgram.getContentPane().add(spinner_4);
+
+		JSpinner spinner_5 = new JSpinner();
+		spinner_5.setBounds(366, 192, 31, 20);
+		firstPanel.add(spinner_5);
+		spinner_5.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 
 		textFieldFn = new JTextField();
-		textFieldFn.setBounds(30, 70, 108, 26);
-		frmLotteryProgram.getContentPane().add(textFieldFn);
+		textFieldFn.setBounds(27, 48, 113, 20);
+		firstPanel.add(textFieldFn);
 		textFieldFn.setColumns(10);
 
 		textFieldLn = new JTextField();
+		textFieldLn.setBounds(27, 95, 113, 20);
+		firstPanel.add(textFieldLn);
 		textFieldLn.setColumns(10);
-		textFieldLn.setBounds(32, 115, 108, 26);
-		frmLotteryProgram.getContentPane().add(textFieldLn);
-		String errorMessage = null;
-
-		JLabel lblJackPot = new JLabel("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
-		lblJackPot.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblJackPot.setForeground(new Color(50, 205, 50));
-		lblJackPot.setBounds(178, 95, 249, 47);
-		frmLotteryProgram.getContentPane().add(lblJackPot);
-
-		JLabel error = new JLabel(errorMessage);
-		error.setHorizontalAlignment(SwingConstants.RIGHT);
-		error.setForeground(Color.RED);
-		error.setBounds(97, 300, 338, 14);
-		frmLotteryProgram.getContentPane().add(error);
 
 		JButton btnAddPerson = new JButton("Add Person");
-		btnAddPerson.setBounds(301, 269, 134, 29);
-		frmLotteryProgram.getContentPane().add(btnAddPerson);
+		btnAddPerson.setBounds(330, 270, 128, 40);
+		firstPanel.add(btnAddPerson);
 
 		JRadioButton rdbtnUtah = new JRadioButton("Utah");
+		rdbtnUtah.setBounds(27, 228, 95, 23);
+		firstPanel.add(rdbtnUtah);
 		buttonGroup.add(rdbtnUtah);
-		rdbtnUtah.setBounds(32, 176, 109, 23);
-		frmLotteryProgram.getContentPane().add(rdbtnUtah);
 		rdbtnUtah.setActionCommand("0.047");
 
 		JRadioButton rdbtnIdaho = new JRadioButton("Idaho");
+		rdbtnIdaho.setBounds(27, 251, 95, 23);
+		firstPanel.add(rdbtnIdaho);
 		buttonGroup.add(rdbtnIdaho);
-		rdbtnIdaho.setBounds(32, 204, 109, 23);
-		frmLotteryProgram.getContentPane().add(rdbtnIdaho);
 		rdbtnIdaho.setActionCommand("0.06");
 
 		JRadioButton rdbtnNevada = new JRadioButton("Nevada");
+		rdbtnNevada.setBounds(27, 279, 95, 23);
+		firstPanel.add(rdbtnNevada);
 		buttonGroup.add(rdbtnNevada);
-		rdbtnNevada.setBounds(32, 227, 109, 23);
-		frmLotteryProgram.getContentPane().add(rdbtnNevada);
 		rdbtnNevada.setActionCommand("0.081");
 
 		JRadioButton rdbtnColorado = new JRadioButton("Colorado");
+		rdbtnColorado.setBounds(27, 176, 113, 23);
+		firstPanel.add(rdbtnColorado);
 		buttonGroup.add(rdbtnColorado);
-		rdbtnColorado.setBounds(32, 248, 109, 23);
-		frmLotteryProgram.getContentPane().add(rdbtnColorado);
 		rdbtnColorado.setActionCommand("0.029");
 
 		JRadioButton rdbtnWyoming = new JRadioButton("Wyoming");
+		rdbtnWyoming.setBounds(27, 202, 113, 23);
+		firstPanel.add(rdbtnWyoming);
 		buttonGroup.add(rdbtnWyoming);
-		rdbtnWyoming.setBounds(32, 270, 109, 23);
-		frmLotteryProgram.getContentPane().add(rdbtnWyoming);
 		rdbtnWyoming.setActionCommand("0.04");
 
+		JPanel resultsPanel = new JPanel();
+		resultsPanel.setBounds(0, 0, 514, 321);
+		frmLotteryProgram.getContentPane().add(resultsPanel);
+		resultsPanel.setLayout(null);
+
+		JLabel lotterylblResults = new JLabel("Lottery");
+		lotterylblResults.setBounds(10, 11, 170, 64);
+		resultsPanel.add(lotterylblResults);
+		lotterylblResults.setFont(new Font("Dialog", Font.BOLD, 50));
+
+		JLabel jckpotResults = new JLabel("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
+		jckpotResults.setForeground(new Color(50, 205, 50));
+		jckpotResults.setFont(new Font("Dialog", Font.PLAIN, 25));
+		jckpotResults.setBounds(311, 36, 147, 33);
+		resultsPanel.add(jckpotResults);
+
+		JLabel namelbl = new JLabel("Name");
+		namelbl.setBounds(20, 119, 100, 14);
+		resultsPanel.add(namelbl);
+
+		JLabel lblNumbers = new JLabel("Numbers");
+		lblNumbers.setBounds(130, 119, 100, 14);
+		resultsPanel.add(lblNumbers);
+
+		JLabel lblWinnings = new JLabel("Winnings");
+		lblWinnings.setBounds(240, 119, 100, 14);
+		resultsPanel.add(lblWinnings);
+
+		JLabel name1 = new JLabel();
+		name1.setText("name1");
+		name1.setVerticalAlignment(SwingConstants.TOP);
+		name1.setBounds(20, 144, 100, 14);
+		resultsPanel.add(name1);
+
+		JLabel name2 = new JLabel("name2");
+		name2.setBounds(20, 181, 100, 14);
+		resultsPanel.add(name2);
+
+		JLabel name3 = new JLabel("name3");
+		name3.setBounds(20, 216, 100, 14);
+		resultsPanel.add(name3);
+
+		JLabel name4 = new JLabel("name4");
+		name4.setBounds(20, 257, 100, 14);
+		resultsPanel.add(name4);
+
+		JLabel name5 = new JLabel("name5");
+		name5.setBounds(20, 296, 100, 14);
+		resultsPanel.add(name5);
+
+		JLabel seperator = new JLabel("_________________________________________________________________________");
+		seperator.setVerticalAlignment(SwingConstants.TOP);
+		seperator.setBounds(10, 119, 460, 24);
+		resultsPanel.add(seperator);
+
+		JLabel numbers1 = new JLabel("numbers1");
+		numbers1.setVerticalAlignment(SwingConstants.TOP);
+		numbers1.setBounds(130, 144, 100, 14);
+		resultsPanel.add(numbers1);
+
+		JLabel numbers2 = new JLabel("numbers2");
+		numbers2.setVerticalAlignment(SwingConstants.TOP);
+		numbers2.setBounds(130, 181, 100, 14);
+		resultsPanel.add(numbers2);
+
+		JLabel numbers3 = new JLabel("numbers1");
+		numbers3.setVerticalAlignment(SwingConstants.TOP);
+		numbers3.setBounds(130, 216, 100, 14);
+		resultsPanel.add(numbers3);
+
+		JLabel numbers4 = new JLabel("numbers1");
+		numbers4.setVerticalAlignment(SwingConstants.TOP);
+		numbers4.setBounds(130, 257, 100, 14);
+		resultsPanel.add(numbers4);
+
+		JLabel numbers5 = new JLabel("numbers1");
+		numbers5.setVerticalAlignment(SwingConstants.TOP);
+		numbers5.setBounds(130, 296, 100, 14);
+		resultsPanel.add(numbers5);
+
+		JLabel winnings1 = new JLabel("numbers1");
+		winnings1.setVerticalAlignment(SwingConstants.TOP);
+		winnings1.setBounds(240, 144, 100, 14);
+		resultsPanel.add(winnings1);
+
+		JLabel winnings2 = new JLabel("numbers1");
+		winnings2.setVerticalAlignment(SwingConstants.TOP);
+		winnings2.setBounds(240, 181, 100, 14);
+		resultsPanel.add(winnings2);
+
+		JLabel winnings3 = new JLabel("numbers1");
+		winnings3.setVerticalAlignment(SwingConstants.TOP);
+		winnings3.setBounds(240, 216, 100, 14);
+		resultsPanel.add(winnings3);
+
+		JLabel winnings4 = new JLabel("numbers1");
+		winnings4.setVerticalAlignment(SwingConstants.TOP);
+		winnings4.setBounds(240, 257, 100, 14);
+		resultsPanel.add(winnings4);
+
+		JLabel winnings5 = new JLabel("numbers1");
+		winnings5.setVerticalAlignment(SwingConstants.TOP);
+		winnings5.setBounds(240, 296, 100, 14);
+		resultsPanel.add(winnings5);
+
+		JLabel jackpotlbl = new JLabel("Jackpot : ");
+		jackpotlbl.setBounds(257, 51, 61, 14);
+		resultsPanel.add(jackpotlbl);
+
+		JLabel winningNumberslbl = new JLabel("Winning Numbers");
+		winningNumberslbl.setBounds(20, 94, 130, 14);
+		resultsPanel.add(winningNumberslbl);
+		JLabel winNumbers = new JLabel();
+		winNumbers.setText(Arrays.toString(winningNumbers));
+
+		winNumbers.setForeground(Color.RED);
+		winNumbers.setFont(new Font("Dialog", Font.PLAIN, 25));
+		winNumbers.setBounds(130, 76, 147, 33);
+		resultsPanel.add(winNumbers);
+
+		JLabel numbersMatchedlbl = new JLabel("Numbers Matched");
+		numbersMatchedlbl.setBounds(350, 119, 108, 14);
+		resultsPanel.add(numbersMatchedlbl);
+
+		JLabel nm1 = new JLabel("nm1");
+		nm1.setBounds(350, 144, 100, 14);
+		resultsPanel.add(nm1);
+
+		JLabel nm2 = new JLabel("nm1");
+		nm2.setBounds(350, 181, 100, 14);
+		resultsPanel.add(nm2);
+
+		JLabel nm3 = new JLabel("nm1");
+		nm3.setBounds(350, 216, 100, 14);
+		resultsPanel.add(nm3);
+
+		JLabel nm4 = new JLabel("nm1");
+		nm4.setBounds(350, 257, 100, 14);
+		resultsPanel.add(nm4);
+
+		JLabel nm5 = new JLabel("nm1");
+		nm5.setBounds(350, 296, 100, 14);
+		resultsPanel.add(nm5);
 		btnAddPerson.addActionListener(new ActionListener() {
+			@Override
+
 			public void actionPerformed(ActionEvent e) {
 				if (!textFieldFn.equals(" ") && !textFieldLn.equals(" ") && !buttonGroup.isSelected(null)) {
-					int number1 = (Integer) spinner_5.getValue();
-					int number2 = (Integer) spinner_1.getValue();
-					int number3 = (Integer) spinner_2.getValue();
-					int number4 = (Integer) spinner_3.getValue();
-					int number5 = (Integer) spinner_4.getValue();
+					int number1 = (Integer) spinner_1.getValue();
+					int number2 = (Integer) spinner_2.getValue();
+					int number3 = (Integer) spinner_3.getValue();
+					int number4 = (Integer) spinner_4.getValue();
+					int number5 = (Integer) spinner_5.getValue();
 					String fName = textFieldFn.getText();
 					String lName = textFieldLn.getText();
 					String state = buttonGroup.getSelection().getActionCommand();
@@ -261,10 +394,35 @@ public class Lottery {
 					spinner_3.setValue(1);
 					spinner_4.setValue(1);
 					error.setText(" ");
+					if (count == 5) {
+						firstPanel.setVisible(false);
+						displayResults();
+						name1.setText(p1.fullName);
+						name2.setText(p2.fullName);
+						name3.setText(p3.fullName);
+						name4.setText(p4.fullName);
+						name5.setText(p5.fullName);
+						numbers1.setText(p1.numbers);
+						numbers2.setText(p2.numbers);
+						numbers3.setText(p3.numbers);
+						numbers4.setText(p4.numbers);
+						numbers5.setText(p5.numbers);
+						winnings1.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p1)));
+						winnings2.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p2)));
+						winnings3.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p3)));
+						winnings4.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p4)));
+						winnings5.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p5)));
+						nm1.setText(String.valueOf(generateWins(p1)));
+						nm2.setText(String.valueOf(generateWins(p2)));
+						nm3.setText(String.valueOf(generateWins(p3)));
+						nm4.setText(String.valueOf(generateWins(p4)));
+						nm5.setText(String.valueOf(generateWins(p5)));
+					}
 				} else {
 					error.setText("You did not fill out all the required fields!");
 				}
 			}
+
 		});
 
 	}
@@ -291,7 +449,6 @@ public class Lottery {
 		if (count == 4) {
 			p5 = new People(fName, lName, state, s1, s2, s3, s4, s5, winnings, taxAmount, atWinnings, taxPercent, info,
 					numbers, fullName);
-			displayResults();
 		}
 
 		count++;
@@ -342,21 +499,16 @@ public class Lottery {
 	}
 
 	public void displayResults() {// convert to text box and add state\
-		System.out.println("Jackpot: " + NumberFormat.getNumberInstance(Locale.US).format(jackpot)
-				+ "   Winning Numbers: " + Arrays.toString(winningNumbers));
-		System.out.printf("%n%-15s %-15s %-15s %-15s", "NAME", "NUMBERS", "# Matched", "WINNINGS");
-		System.out.println("\n------------------------------------------------------------");
-		System.out.printf("%s %-15s $%-15s%n", p1.info, generateWins(p1),
-				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p1)));
-		System.out.printf("%s %-15s $%-15s%n", p2.info, generateWins(p2),
-				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p2)));
-		System.out.printf("%s %-15s $%-15s%n", p3.info, generateWins(p3),
-				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p3)));
-		System.out.printf("%s %-15s $%-15s%n", p4.info, generateWins(p4),
-				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p4)));
-		System.out.printf("%s %-15s $%-15s%n", p5.info, generateWins(p5),
-				NumberFormat.getNumberInstance(Locale.US).format(winAmount(p5)));
+		generateWins(p1);
+		winAmount(p1);
+		generateWins(p2);
+		winAmount(p2);
+		generateWins(p3);
+		winAmount(p3);
+		generateWins(p4);
+		winAmount(p4);
+		generateWins(p5);
+		winAmount(p5);
 
-		System.exit(0);
 	}
 }
