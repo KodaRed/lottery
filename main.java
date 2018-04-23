@@ -167,36 +167,36 @@ public class Lottery {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Pick 5 Numbers",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(216, 176, 211, 57);
+		panel_2.setBounds(216, 176, 256, 64);
 		firstPanel.add(panel_2);
 		panel_2.setLayout(null);
 
 		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(6, 16, 34, 34);
+		spinner_1.setBounds(9, 16, 40, 35);
 		panel_2.add(spinner_1);
 		spinner_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		spinner_1.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 
 		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(48, 16, 34, 34);
+		spinner_2.setBounds(58, 16, 40, 35);
 		panel_2.add(spinner_2);
 		spinner_2.setFont(new Font("Dialog", Font.BOLD, 11));
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 
 		spinner_3 = new JSpinner();
-		spinner_3.setBounds(89, 16, 34, 34);
+		spinner_3.setBounds(107, 16, 40, 35);
 		panel_2.add(spinner_3);
 		spinner_3.setFont(new Font("Dialog", Font.BOLD, 11));
 		spinner_3.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 
 		JSpinner spinner_4 = new JSpinner();
-		spinner_4.setBounds(130, 16, 34, 34);
+		spinner_4.setBounds(156, 16, 40, 35);
 		panel_2.add(spinner_4);
 		spinner_4.setFont(new Font("Dialog", Font.BOLD, 11));
 		spinner_4.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 
 		JSpinner spinner_5 = new JSpinner();
-		spinner_5.setBounds(171, 16, 34, 34);
+		spinner_5.setBounds(205, 16, 40, 35);
 		panel_2.add(spinner_5);
 		spinner_5.setFont(new Font("Dialog", Font.BOLD, 11));
 		spinner_5.setModel(new SpinnerNumberModel(1, 1, 9, 1));
@@ -634,6 +634,7 @@ public class Lottery {
 			}
 
 		});
+
 
 	}
 
