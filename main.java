@@ -358,7 +358,7 @@ public class Lottery {
 		numbers5.setForeground(new Color(0, 0, 255));
 		numbers5.setFont(new Font("Dialog", Font.BOLD, 14));
 		numbers5.setHorizontalAlignment(SwingConstants.CENTER);
-		numbers5.setBounds(184, 285, 101, 44);
+		numbers5.setBounds(174, 285, 111, 44);
 		resultsPanel.add(numbers5);
 
 		JLabel winnings1 = new JLabel("numbers1");
@@ -615,11 +615,11 @@ public class Lottery {
 						numbers3.setText(p3.numbers);
 						numbers4.setText(p4.numbers);
 						numbers5.setText(p5.numbers);
-						winnings1.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p1)));
-						winnings2.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p2)));
-						winnings3.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p3)));
-						winnings4.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p4)));
-						winnings5.setText(NumberFormat.getNumberInstance(Locale.US).format(winAmount(p5)));
+						winnings1.setText("$" + NumberFormat.getNumberInstance(Locale.US).format(winAmount(p1)));
+						winnings2.setText("$" + NumberFormat.getNumberInstance(Locale.US).format(winAmount(p2)));
+						winnings3.setText("$" + NumberFormat.getNumberInstance(Locale.US).format(winAmount(p3)));
+						winnings4.setText("$" + NumberFormat.getNumberInstance(Locale.US).format(winAmount(p4)));
+						winnings5.setText("$" + NumberFormat.getNumberInstance(Locale.US).format(winAmount(p5)));
 						nm1.setText(String.valueOf(generateWins(p1)));
 						nm2.setText(String.valueOf(generateWins(p2)));
 						nm3.setText(String.valueOf(generateWins(p3)));
@@ -634,7 +634,6 @@ public class Lottery {
 			}
 
 		});
-
 
 	}
 
