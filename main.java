@@ -124,7 +124,7 @@ public class Lottery {
 		error.setForeground(Color.RED);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(21, 16, 125, 106);
 		firstPanel.add(panel_1);
 		panel_1.setLayout(null);
@@ -158,7 +158,7 @@ public class Lottery {
 		firstPanel.add(lblLottery);
 		lblLottery.setFont(new Font("Lucida Grande", Font.BOLD, 50));
 
-		JLabel lblJackPot = new JLabel("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
+		JLabel lblJackPot = new JLabel("$" + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
 		lblJackPot.setBounds(286, 86, 147, 33);
 		firstPanel.add(lblJackPot);
 		lblJackPot.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
@@ -259,6 +259,7 @@ public class Lottery {
 		lblJackpot.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblJackpot.setBounds(197, 95, 79, 14);
 		firstPanel.add(lblJackpot);
+		
 
 		JPanel resultsPanel = new JPanel();
 		resultsPanel.setBounds(0, 0, 500, 383);
@@ -270,7 +271,7 @@ public class Lottery {
 		resultsPanel.add(lotterylblResults);
 		lotterylblResults.setFont(new Font("Dialog", Font.BOLD, 50));
 
-		JLabel jckpotResults = new JLabel("$ " + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
+		JLabel jckpotResults = new JLabel("$" + NumberFormat.getNumberInstance(Locale.US).format(jackpot));
 		jckpotResults.setHorizontalAlignment(SwingConstants.LEFT);
 		jckpotResults.setForeground(new Color(50, 205, 50));
 		jckpotResults.setFont(new Font("Dialog", Font.PLAIN, 25));
@@ -299,101 +300,101 @@ public class Lottery {
 		name1.setFont(new Font("Dialog", Font.BOLD, 14));
 		name1.setHorizontalAlignment(SwingConstants.CENTER);
 		name1.setText("name1");
-		name1.setBounds(0, 128, 175, 44);
+		name1.setBounds(0, 131, 175, 40);
 		resultsPanel.add(name1);
 
 		JLabel name2 = new JLabel("name2");
 		name2.setFont(new Font("Dialog", Font.BOLD, 14));
 		name2.setHorizontalAlignment(SwingConstants.CENTER);
-		name2.setBounds(0, 165, 175, 44);
+		name2.setBounds(0, 171, 175, 40);
 		resultsPanel.add(name2);
 
 		JLabel name3 = new JLabel("name3");
 		name3.setFont(new Font("Dialog", Font.BOLD, 14));
 		name3.setHorizontalAlignment(SwingConstants.CENTER);
-		name3.setBounds(0, 205, 175, 44);
+		name3.setBounds(0, 211, 175, 40);
 		resultsPanel.add(name3);
 
 		JLabel name4 = new JLabel("name4");
 		name4.setFont(new Font("Dialog", Font.BOLD, 14));
 		name4.setHorizontalAlignment(SwingConstants.CENTER);
-		name4.setBounds(0, 245, 175, 44);
+		name4.setBounds(0, 251, 175, 40);
 		resultsPanel.add(name4);
 
 		JLabel name5 = new JLabel("name5");
 		name5.setFont(new Font("Dialog", Font.BOLD, 14));
 		name5.setHorizontalAlignment(SwingConstants.CENTER);
-		name5.setBounds(0, 285, 175, 44);
+		name5.setBounds(0, 292, 175, 40);
 		resultsPanel.add(name5);
 
 		JLabel numbers1 = new JLabel("numbers1");
 		numbers1.setForeground(new Color(0, 0, 255));
 		numbers1.setFont(new Font("Dialog", Font.BOLD, 14));
 		numbers1.setHorizontalAlignment(SwingConstants.CENTER);
-		numbers1.setBounds(174, 131, 111, 38);
+		numbers1.setBounds(174, 131, 111, 40);
 		resultsPanel.add(numbers1);
 
-		JLabel numbers2 = new JLabel("numbers2");
+		JLabel numbers2 = new JLabel("numbers1");
 		numbers2.setForeground(new Color(0, 0, 255));
 		numbers2.setFont(new Font("Dialog", Font.BOLD, 14));
 		numbers2.setHorizontalAlignment(SwingConstants.CENTER);
-		numbers2.setBounds(174, 165, 111, 44);
+		numbers2.setBounds(174, 171, 111, 40);
 		resultsPanel.add(numbers2);
 
 		JLabel numbers3 = new JLabel("numbers1");
 		numbers3.setForeground(new Color(0, 0, 255));
 		numbers3.setFont(new Font("Dialog", Font.BOLD, 14));
 		numbers3.setHorizontalAlignment(SwingConstants.CENTER);
-		numbers3.setBounds(174, 205, 111, 44);
+		numbers3.setBounds(174, 211, 111, 40);
 		resultsPanel.add(numbers3);
 
 		JLabel numbers4 = new JLabel("numbers1");
 		numbers4.setForeground(new Color(0, 0, 255));
 		numbers4.setFont(new Font("Dialog", Font.BOLD, 14));
 		numbers4.setHorizontalAlignment(SwingConstants.CENTER);
-		numbers4.setBounds(174, 245, 111, 44);
+		numbers4.setBounds(174, 251, 111, 40);
 		resultsPanel.add(numbers4);
 
 		JLabel numbers5 = new JLabel("numbers1");
 		numbers5.setForeground(new Color(0, 0, 255));
 		numbers5.setFont(new Font("Dialog", Font.BOLD, 14));
 		numbers5.setHorizontalAlignment(SwingConstants.CENTER);
-		numbers5.setBounds(174, 285, 111, 44);
+		numbers5.setBounds(174, 291, 111, 40);
 		resultsPanel.add(numbers5);
 
 		JLabel winnings1 = new JLabel("numbers1");
 		winnings1.setHorizontalAlignment(SwingConstants.CENTER);
 		winnings1.setForeground(new Color(0, 128, 0));
 		winnings1.setFont(new Font("Dialog", Font.BOLD, 14));
-		winnings1.setBounds(287, 131, 127, 38);
+		winnings1.setBounds(287, 131, 125, 40);
 		resultsPanel.add(winnings1);
 
 		JLabel winnings2 = new JLabel("numbers1");
 		winnings2.setHorizontalAlignment(SwingConstants.CENTER);
 		winnings2.setForeground(new Color(0, 128, 0));
 		winnings2.setFont(new Font("Dialog", Font.BOLD, 14));
-		winnings2.setBounds(287, 168, 127, 35);
+		winnings2.setBounds(287, 171, 125, 40);
 		resultsPanel.add(winnings2);
 
 		JLabel winnings3 = new JLabel("numbers1");
 		winnings3.setHorizontalAlignment(SwingConstants.CENTER);
 		winnings3.setFont(new Font("Dialog", Font.BOLD, 14));
 		winnings3.setForeground(new Color(0, 128, 0));
-		winnings3.setBounds(287, 205, 127, 44);
+		winnings3.setBounds(287, 211, 125, 40);
 		resultsPanel.add(winnings3);
 
 		JLabel winnings4 = new JLabel("numbers1");
 		winnings4.setFont(new Font("Dialog", Font.BOLD, 14));
 		winnings4.setForeground(new Color(0, 128, 0));
 		winnings4.setHorizontalAlignment(SwingConstants.CENTER);
-		winnings4.setBounds(287, 245, 127, 44);
+		winnings4.setBounds(287, 251, 125, 40);
 		resultsPanel.add(winnings4);
 
 		JLabel winnings5 = new JLabel("numbers1");
 		winnings5.setHorizontalAlignment(SwingConstants.CENTER);
 		winnings5.setFont(new Font("Dialog", Font.BOLD, 14));
 		winnings5.setForeground(new Color(0, 128, 0));
-		winnings5.setBounds(287, 285, 127, 44);
+		winnings5.setBounds(287, 291, 125, 40);
 		resultsPanel.add(winnings5);
 
 		JLabel jackpotlbl = new JLabel("JACKPOT -");
@@ -426,70 +427,66 @@ public class Lottery {
 		nm1.setHorizontalAlignment(SwingConstants.CENTER);
 		nm1.setFont(new Font("Dialog", Font.BOLD, 14));
 		nm1.setForeground(new Color(255, 0, 0));
-		nm1.setBounds(411, 128, 86, 44);
+		nm1.setBounds(412, 131, 86, 40);
 		resultsPanel.add(nm1);
 
 		JLabel nm2 = new JLabel("nm1");
 		nm2.setHorizontalAlignment(SwingConstants.CENTER);
 		nm2.setFont(new Font("Dialog", Font.BOLD, 14));
 		nm2.setForeground(new Color(255, 0, 0));
-		nm2.setBounds(411, 168, 86, 35);
+		nm2.setBounds(412, 171, 86, 40);
 		resultsPanel.add(nm2);
 
 		JLabel nm3 = new JLabel("nm1");
 		nm3.setHorizontalAlignment(SwingConstants.CENTER);
 		nm3.setFont(new Font("Dialog", Font.BOLD, 14));
 		nm3.setForeground(new Color(255, 0, 0));
-		nm3.setBounds(411, 205, 86, 44);
+		nm3.setBounds(412, 211, 86, 40);
 		resultsPanel.add(nm3);
 
 		JLabel nm4 = new JLabel("nm1");
 		nm4.setHorizontalAlignment(SwingConstants.CENTER);
 		nm4.setFont(new Font("Dialog", Font.BOLD, 14));
 		nm4.setForeground(new Color(255, 0, 0));
-		nm4.setBounds(411, 245, 86, 44);
+		nm4.setBounds(412, 251, 86, 40);
 		resultsPanel.add(nm4);
 
 		JLabel nm5 = new JLabel("nm1");
 		nm5.setHorizontalAlignment(SwingConstants.CENTER);
 		nm5.setFont(new Font("Dialog", Font.BOLD, 14));
 		nm5.setForeground(new Color(255, 0, 0));
-		nm5.setBounds(411, 285, 86, 44);
+		nm5.setBounds(412, 291, 86, 40);
 		resultsPanel.add(nm5);
-
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 131, 1, 2);
-		resultsPanel.add(separator);
 
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBackground(Color.BLACK);
-		separator_1.setBounds(0, 127, 500, 2);
+		separator_1.setBounds(0, 130, 500, 2);
 		resultsPanel.add(separator_1);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBackground(Color.BLACK);
-		separator_2.setBounds(0, 167, 500, 2);
+		separator_2.setBounds(0, 170, 500, 2);
 		resultsPanel.add(separator_2);
 
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBackground(Color.BLACK);
-		separator_3.setBounds(0, 205, 500, 2);
+		separator_3.setBounds(0, 210, 500, 2);
 		resultsPanel.add(separator_3);
 
 		JSeparator separator_4 = new JSeparator();
 		separator_4.setBackground(Color.BLACK);
-		separator_4.setBounds(0, 247, 500, 2);
+		separator_4.setBounds(0, 250, 500, 2);
 		resultsPanel.add(separator_4);
 
 		JSeparator separator_5 = new JSeparator();
 		separator_5.setBackground(Color.BLACK);
-		separator_5.setBounds(0, 287, 500, 22);
+		separator_5.setBounds(0, 290, 500, 2);
 		resultsPanel.add(separator_5);
 
 		JSeparator separator_8 = new JSeparator();
 		separator_8.setOrientation(SwingConstants.VERTICAL);
 		separator_8.setBackground(Color.BLACK);
-		separator_8.setBounds(174, 94, 11, 235);
+		separator_8.setBounds(174, 92, 11, 238);
 		resultsPanel.add(separator_8);
 
 		JSeparator separator_6 = new JSeparator();
@@ -500,19 +497,19 @@ public class Lottery {
 		JSeparator separator_9 = new JSeparator();
 		separator_9.setOrientation(SwingConstants.VERTICAL);
 		separator_9.setBackground(Color.BLACK);
-		separator_9.setBounds(285, 89, 11, 240);
+		separator_9.setBounds(285, 92, 11, 238);
 		resultsPanel.add(separator_9);
 
 		JSeparator separator_12 = new JSeparator();
 		separator_12.setOrientation(SwingConstants.VERTICAL);
 		separator_12.setBackground(Color.BLACK);
-		separator_12.setBounds(499, 90, 1, 302);
+		separator_12.setBounds(499, 92, 1, 238);
 		resultsPanel.add(separator_12);
 
-		JLabel results = new JLabel("RESULTS :");
+		JLabel results = new JLabel("RESULTS");
 		results.setHorizontalAlignment(SwingConstants.LEFT);
 		results.setFont(new Font("Dialog", Font.BOLD, 16));
-		results.setBounds(20, 69, 119, 14);
+		results.setBounds(49, 69, 119, 14);
 		resultsPanel.add(results);
 
 		JSeparator separator_13 = new JSeparator();
@@ -538,18 +535,18 @@ public class Lottery {
 
 		JSeparator separator_17 = new JSeparator();
 		separator_17.setBackground(Color.BLACK);
-		separator_17.setBounds(0, 330, 500, 22);
+		separator_17.setBounds(0, 330, 500, 2);
 		resultsPanel.add(separator_17);
 
 		JButton btnClose = new JButton("CLOSE");
 		btnClose.setFont(new Font("Dialog", Font.BOLD, 13));
-		btnClose.setBounds(366, 332, 131, 40);
+		btnClose.setBounds(366, 334, 131, 35);
 		resultsPanel.add(btnClose);
 
 		JSeparator separator_11 = new JSeparator();
 		separator_11.setOrientation(SwingConstants.VERTICAL);
 		separator_11.setBackground(Color.BLACK);
-		separator_11.setBounds(411, 94, 11, 244);
+		separator_11.setBounds(411, 92, 11, 238);
 		resultsPanel.add(separator_11);
 
 		// Makes it so the " CLOSE" Button works.
@@ -560,6 +557,7 @@ public class Lottery {
 			}
 
 		});
+
 		// Cycles through 5 times and gets the values of each field in the GUI then uses
 		// the Methods to do Calculations
 		btnAddPerson.addActionListener(new ActionListener() {
